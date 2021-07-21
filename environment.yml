@@ -1,0 +1,8 @@
+name: viz
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - streamlit
+  - plotly=5.1.0
+
