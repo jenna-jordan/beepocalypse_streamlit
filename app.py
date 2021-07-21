@@ -123,7 +123,7 @@ query_text = {
 
 
 with st.sidebar:
-    st.header("Configure a plot")
+    st.header("Configure the plot")
     # plot_button = st.button("Add Plot")
     # clear_button = st.button("Clear Plots")
 
@@ -148,7 +148,10 @@ with st.sidebar:
         # if "query" not in st.session_state:
         #     st.session_state.query = "insect_population"
 
-    st.subheader("Learn more")
+    st.header("Learn more")
+    st.markdown(
+        "Read the journal article: [No buzz for bees: Media coverage of pollinator decline](https://www.pnas.org/content/118/2/e2002552117)"
+    )
     see_queries = st.checkbox("Show Queries?")
     if see_queries:
         see_which_queries = st.multiselect(
@@ -177,6 +180,11 @@ def create_plot(which_query=choose_comparison, y_axis=choose_CountOrProp):
         color=color,
         title=title_text,
     )
+
+    if which_query == "Queries":
+        for trace in fig["data"]:
+            if trace["name"] == "total":
+                trace["visible"] = "legendonly"
 
     fig.update_layout(xaxis_rangeslider_visible=True)
 
